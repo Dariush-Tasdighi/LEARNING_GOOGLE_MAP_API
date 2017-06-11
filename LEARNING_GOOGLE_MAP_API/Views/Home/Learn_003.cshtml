@@ -1,0 +1,207 @@
+﻿@{
+	Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+	<meta name="viewport" content="width=device-width" />
+
+	<title>Index</title>
+
+	<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+
+	<style>
+		body {
+			margin: 20px;
+			direction: rtl;
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<button type="button" id="btnZoomIn" class="btn btn-primary">Zoom In</button>
+		<button type="button" id="btnZoomOut" class="btn btn-primary">Zoom Out</button>
+		<button type="button" id="btnDisplay" class="btn btn-primary">Display Hot Points</button>
+
+		<h3>
+			Zoom: <span id="zoom"></span>
+		</h3>
+
+		<hr />
+
+		<div class="row">
+			<div class="col-sm-3">
+				Lat
+			</div>
+			<div class="col-sm-9">
+				<input type="text" id="lat" class="form-control" />
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-sm-3">
+				Lng
+			</div>
+			<div class="col-sm-9">
+				<input type="text" id="lng" class="form-control" />
+			</div>
+		</div>
+
+		<hr />
+
+		<div id="googleMap" style="width:100%;height:400px;"></div>
+	</div>
+
+	<script src="~/Scripts/jquery-3.1.1.min.js"></script>
+
+	<script>
+
+		var map = null;
+		var mapProp = null;
+
+		var zoom = 18;
+		var marker = null;
+
+		$(document).ready(function () {
+
+			$('span#zoom').html(zoom);
+
+			$('button#btnZoomIn').click(function () {
+
+				zoom++;
+
+				$('span#zoom').html(zoom);
+
+				map.setZoom(zoom);
+
+			});
+
+			$('button#btnZoomOut').click(function () {
+
+				if (zoom > 0) {
+
+					zoom--;
+
+					$('span#zoom').html(zoom);
+
+					map.setZoom(zoom);
+
+				}
+
+			});
+
+			$('button#btnDisplay').click(function () {
+
+				var image = '/Content/images/Pin.png';
+
+				var varMarker1 = new google.maps.Marker({
+
+					map: map,
+					icon: image,
+					position: { lng: 51.0, lat: 36.0 },
+
+				});
+
+				var varMarker2 = new google.maps.Marker({
+
+					map: map,
+					icon: image,
+					position: { lng: 51.0, lat: 35.97 },
+
+				});
+
+				var varMarker3 = new google.maps.Marker({
+
+					map: map,
+					icon: image,
+					position: { lng: 51.0, lat: 35.92 },
+
+				});
+
+				var varMarker4 = new google.maps.Marker({
+
+					map: map,
+					icon: image,
+					position: { lng: 51.03, lat: 35.87 },
+
+				});
+
+				var varMarker5 = new google.maps.Marker({
+
+					map: map,
+					icon: image,
+					position: { lng: 51.06, lat: 35.83 },
+
+				});
+
+				var varMarker6 = new google.maps.Marker({
+
+					map: map,
+					icon: image,
+					position: { lng: 51.09, lat: 35.80 },
+
+				});
+
+				var varMarker7 = new google.maps.Marker({
+
+					map: map,
+					icon: image,
+					position: { lng: 51.06, lat: 35.77 },
+
+				});
+
+				var varMarker8 = new google.maps.Marker({
+
+					map: map,
+					icon: image,
+					position: { lng: 51.03, lat: 35.74 },
+
+				});
+
+			});
+
+		});
+
+		function initialize() {
+
+			var center =
+				new google.maps.LatLng(35.72547185625455, 51.44249975681305);
+
+			mapProp = {
+
+				zoom: zoom,
+				center: center,
+				mapTypeId: google.maps.MapTypeId.ROADMAP,
+
+			};
+
+			map =
+				new google.maps.Map(document.getElementById('googleMap'), mapProp);
+
+			marker = new google.maps.Marker({ position: center, map: map });
+
+			//map.addListener('click', function () {
+			//});
+
+			google.maps.event.addListener(map, 'click', function (event) {
+
+				//alert(event.latLng);
+
+				//alert(event.latLng.lat());
+				//alert(event.latLng.lng());
+
+				$('input#lat').val(event.latLng.lat());
+				$('input#lng').val(event.latLng.lng());
+
+				marker = new google.maps.Marker({ position: event.latLng, map: map });
+
+			});
+		}
+
+	</script>
+
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDQwlCEQqJQAu9xC6fBZDI0pOMNG5AKKus&callback=initialize&language=fa&region=IR" async defer></script>
+</body>
+</html>

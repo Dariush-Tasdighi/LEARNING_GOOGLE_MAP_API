@@ -1,0 +1,91 @@
+﻿@{
+	Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+	<meta name="viewport" content="width=device-width" />
+
+	<title>Index</title>
+
+	<style>
+		body {
+			margin: 20px;
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<div id="googleMap" style="width:500px;height:380px;"></div>
+	</div>
+
+	@*Note: برای اینکه دستورات مدل دوم درست کار کند باید در داخل تگ
+	Body
+	و در انتها نوشته شود*@
+
+	<script src="~/Scripts/jquery-3.1.1.min.js"></script>
+
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDQwlCEQqJQAu9xC6fBZDI0pOMNG5AKKus"></script>
+
+	<script>
+
+		var map = null;
+		var mapProp = null;
+
+		$(document).ready(function () {
+
+			google.maps.event.addDomListener(window, 'load', initialize);
+
+		});
+
+		function initialize() {
+
+			mapProp = {
+
+				zoom: 10,
+				mapTypeId: google.maps.MapTypeId.ROADMAP,
+				center: new google.maps.LatLng(35.8288889, 51.0058333),
+
+			};
+
+			map =
+				new google.maps.Map(document.getElementById('googleMap'), mapProp);
+		}
+
+	</script>
+
+	@*OR*@
+
+	@*<script>
+
+			var map = null;
+			var mapProp = null;
+
+			$(document).ready(function () {
+
+
+
+			});
+
+			function initialize() {
+
+				mapProp = {
+
+					zoom: 10,
+					mapTypeId: google.maps.MapTypeId.ROADMAP,
+					center: new google.maps.LatLng(35.8288889, 51.0058333),
+
+				};
+
+				map =
+					new google.maps.Map(document.getElementById('googleMap'), mapProp);
+
+			}
+
+		</script>
+
+		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDQwlCEQqJQAu9xC6fBZDI0pOMNG5AKKus&callback=initialize"></script>*@
+</body>
+</html>

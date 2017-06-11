@@ -1,0 +1,161 @@
+﻿@{
+	Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+	<meta name="viewport" content="width=device-width" />
+
+	<title>Index</title>
+
+	<style>
+		body {
+			margin: 20px;
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<button type="button" id="btnZoomIn" class="btn btn-primary">Zoom In</button>
+		<button type="button" id="btnZoomOut" class="btn btn-primary">Zoom Out</button>
+		<button type="button" id="btnDisplay" class="btn btn-primary">Display Hot Points!</button>
+
+		<h3>
+			Zoom: <span id="zoom"></span>
+		</h3>
+
+		<hr />
+
+		<div id="googleMap" style="width:500px;height:380px;"></div>
+	</div>
+
+	<script src="~/Scripts/jquery-3.1.1.min.js"></script>
+
+	<script>
+
+		var zoom = 10;
+		var map = null;
+		var mapProp = null;
+
+		$(document).ready(function () {
+
+			$('span#zoom').html(zoom);
+
+			$('button#btnZoomIn').click(function () {
+
+				zoom++;
+
+				$('span#zoom').html(zoom);
+
+				map.setZoom(zoom);
+
+			});
+
+			$('button#btnZoomOut').click(function () {
+
+				if (zoom > 0) {
+
+					zoom--;
+
+					$('span#zoom').html(zoom);
+
+					map.setZoom(zoom);
+
+				}
+
+			});
+
+			$('button#btnDisplay').click(function () {
+
+				var image = '/Content/images/Pin.png';
+
+				var varMarker1 = new google.maps.Marker({
+
+					map: map,
+					icon: image,
+					position: { lng: 51.0, lat: 36.0 },
+
+				});
+
+				var varMarker2 = new google.maps.Marker({
+
+					map: map,
+					icon: image,
+					position: { lng: 51.0, lat: 35.97 },
+
+				});
+
+				var varMarker3 = new google.maps.Marker({
+
+					map: map,
+					icon: image,
+					position: { lng: 51.0, lat: 35.92 },
+
+				});
+
+				var varMarker4 = new google.maps.Marker({
+
+					map: map,
+					icon: image,
+					position: { lng: 51.03, lat: 35.87 },
+
+				});
+
+				var varMarker5 = new google.maps.Marker({
+
+					map: map,
+					icon: image,
+					position: { lng: 51.06, lat: 35.83 },
+
+				});
+
+				var varMarker6 = new google.maps.Marker({
+
+					map: map,
+					icon: image,
+					position: { lng: 51.09, lat: 35.80 },
+
+				});
+
+				var varMarker7 = new google.maps.Marker({
+
+					map: map,
+					icon: image,
+					position: { lng: 51.06, lat: 35.77 },
+
+				});
+
+				var varMarker8 = new google.maps.Marker({
+
+					map: map,
+					icon: image,
+					position: { lng: 51.03, lat: 35.74 },
+
+				});
+
+			});
+
+		});
+
+		function initialize() {
+
+			mapProp = {
+
+				zoom: 10,
+				mapTypeId: google.maps.MapTypeId.ROADMAP,
+				center: new google.maps.LatLng(35.8288889, 51.0058333),
+
+			};
+
+			map =
+				new google.maps.Map(document.getElementById('googleMap'), mapProp);
+
+		}
+
+	</script>
+
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDQwlCEQqJQAu9xC6fBZDI0pOMNG5AKKus&callback=initialize"></script>
+</body>
+</html>
